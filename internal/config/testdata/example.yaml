@@ -1,0 +1,12 @@
+# Example declared service configuration for driftwatch
+name: example-service
+version: "2.0.0"
+image: myrepo/example:2.0.0
+replicas: 2
+environment:
+  LOG_LEVEL: debug
+  PORT: "9090"
+  DB_HOST: postgres.internal
+ports:
+  - "9090:9090"
+  - "9091:9091"
