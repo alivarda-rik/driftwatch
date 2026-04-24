@@ -80,3 +80,10 @@ func TestLoad_UnsupportedExtension(t *testing.T) {
 		t.Fatal("expected error for unsupported extension, got nil")
 	}
 }
+
+func TestLoad_FileNotFound(t *testing.T) {
+	_, err := config.Load("/nonexistent/path/svc.yaml")
+	if err == nil {
+		t.Fatal("expected error for missing file, got nil")
+	}
+}
