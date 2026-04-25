@@ -76,6 +76,17 @@ func (w *Watcher) Watch(cfg *config.ServiceConfig, live map[string]string) <-cha
 }
 
 // Stop signals the Watch goroutine to exit.
+// It is safe to call Stop only once; subsequent calls will panic on a closed channel.
 func (w *Watcher) Stop() {
 	close(w.stop)
+}
+
+// IsStopped reports whether the watcher has been stopped.
+func (w *Watcher) IsStopped() bool {
+	select {
+	case <-w.stop:
+		return true
+	default:
+		return false
+	}
 }
